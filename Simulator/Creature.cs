@@ -13,6 +13,7 @@ namespace Simulator
     {
 
         public string? Name { get; set; }
+
         public int Level { get; set; } = 1;
         public Creature(string name)
         {
