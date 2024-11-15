@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Simulator
 {
-    internal class Creature
+    class Creature
     {
-        public string? Name
-        {
-            get { return Name; }
-        }
 
-        private int level;
-        public int Level
+        public string? Name { get; set; }
+        public int Level { get; set; } = 1;
+        public Creature(string name)
         {
-            get { return level; }
-            set { level = value > 0 ? value : 1; }
+            Name = name;
         }
+        public Creature() { }
+        public string Info => $"{Name} [{Level}]";
+        public void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
         
+
     }
 }
