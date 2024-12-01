@@ -10,11 +10,11 @@ using System.Xml.Linq;
 
 namespace Simulator
 {
-    class Creature
+    public class Creature
     {
         private int level;
-        private string name = "Unknown";
-        public string Name
+        private string? name = "Unknown";
+        public string? Name
         {
             get => name;
             init
@@ -22,7 +22,7 @@ namespace Simulator
                 name = Validate.Limit(value, 3, 25);
             }
         }
-
+        public string Info => $"{Name} [{Level}]";
         public int Level
         {
             get => level;
@@ -45,7 +45,7 @@ namespace Simulator
         }
 
         //public properties & methods
-        public string Info => $"{Name} [{Level}]";
+        //public abstract string Info;
         public void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
         public void Go(Direction direction) => Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
         public void Go(Direction[] directions)
@@ -56,6 +56,9 @@ namespace Simulator
             }
         }
         public void Go(string directions) => Go(DirectionParser.Parse(directions));
-
+        //public override string ToString()
+        //{
+        //    return string.Concat(this.GetType().Name, Info);
+        //}
     }
 }
