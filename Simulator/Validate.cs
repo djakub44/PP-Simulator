@@ -31,5 +31,12 @@ namespace Simulator
             }
             return name;
         }
+        public static int Counter(int number,int max)
+        {
+            if (number < max)
+                return ++number;
+            else
+                return 0;
+        }
     }
 }

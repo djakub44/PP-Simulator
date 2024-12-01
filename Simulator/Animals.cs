@@ -9,7 +9,7 @@ namespace Simulator
     public class Animals
     {
         private string description = "Unknown";
-        private uint size;
+        //private uint size;
         public required string Description 
         {
             get => description;
@@ -21,15 +21,16 @@ namespace Simulator
         public uint Size { get; set; } = 3;
 
 
-        public string Info => $"{Description} <{Size}>";
+        public virtual string Info => $"{Description} <{Size}>";
 
         public Animals()
         {
             
         }
+        public override string ToString() => string.Concat(this.GetType().Name, ": ", Info);
 
-        
-        
+
+
     }
 
 }
