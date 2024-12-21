@@ -44,17 +44,11 @@ namespace Simulator
                 level++;
         }
         
-        public abstract void SayHi();
+        public abstract string Greeting();
         public abstract int Power { get; }
-        public void Go(Direction direction) => Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
-        public void Go(Direction[] directions)
-        {
-            foreach (var direction in directions)
-            {
-                Go(direction);
-            }   
-        }
-        public void Go(string directions) => Go(DirectionParser.Parse(directions));
+        public string Go(Direction direction) => $"{Name} goes {direction.ToString().ToLower()}";
+        public string[] Go(Direction[] directions) => directions.Select(direction => Go(direction)).ToArray();
+        public string[] Go(string directions) => Go(DirectionParser.Parse(directions));
         public override string ToString() => string.Concat(this.GetType().Name,": ", Info);
     }
 }

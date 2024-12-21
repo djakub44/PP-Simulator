@@ -24,13 +24,12 @@ namespace Simulator
         private int singCounter = 0;
         public void Sing()
         {
-            Console.WriteLine($"{Name} is singing.");
             singCounter = Validate.Counter(singCounter, 3);
             if (singCounter == 0)
                 agility = Validate.Limit(agility + 1, 0, 10);
         }
         public override int Power => (8 * Level) + (2 * Agility);
-        public override void SayHi() => Console.WriteLine($"Hi Im {Name} and my level is {Level} and my agility is {Agility}");
+        public override string Greeting() => $"Hi Im {Name} and my level is {Level} and my agility is {Agility}";
         public override string Info => $"{Name} [{Level}][{Agility}]";
     }
 }
