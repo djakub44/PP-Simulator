@@ -45,5 +45,12 @@ namespace Simulator
             else
                 return false;
         }
+        public static bool LimitSize(int val, int min, int max)
+        {
+            if (val < min || val > max)
+                return false;
+            else
+                return true;
+        }
     }
 }

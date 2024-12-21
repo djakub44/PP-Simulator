@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Tracing;
+﻿using Simulator.Maps;
+using System.Diagnostics.Tracing;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Simulator
@@ -123,8 +124,19 @@ namespace Simulator
                 Console.WriteLine(R2);
                 var R3 = new Rectangle(1, 1, 5, 1);
             }
-            Lab5a();
 
+            void Lab5b()
+            {
+                var SM = new SmallSquareMap(5);
+
+                var p = new Point(2, 2);
+                var p2 = SM.Next(p,Direction.Up);
+                Console.WriteLine(p2);
+
+
+            }
+            //Lab5a();
+            Lab5b();
 
         }
 
