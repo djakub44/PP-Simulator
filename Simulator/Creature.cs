@@ -43,6 +43,7 @@ namespace Simulator
             if (level < 10)
                 level++;
         }
+        
         public abstract void SayHi();
         public abstract int Power { get; }
         public void Go(Direction direction) => Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Tracing;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Simulator
 {
@@ -37,23 +38,23 @@ namespace Simulator
 
             //a = new() { Description = "Mice           are great", Size = 40 };
             //Console.WriteLine(a.Info);
-            //        Creature c = new("Shrek", 7);
-            //        c.SayHi();
+            //Orc c = new("Shrek", 7);
+            //c.SayHi();
 
-            //        Console.WriteLine("\n* Up");
-            //        c.Go(Direction.Up);
+            //Console.WriteLine("\n* Up");
+            //c.Go(Direction.Up);
 
-            //        Console.WriteLine("\n* Right, Left, Left, Down");
-            //        Direction[] directions = {
+            //Console.WriteLine("\n* Right, Left, Left, Down");
+            //Direction[] directions = {
             //    Direction.Right, Direction.Left, Direction.Left, Direction.Down
             //};
-            //        c.Go(directions);
+            //c.Go(directions);
 
-            //        Console.WriteLine("\n* LRL");
-            //        c.Go("LRL");
+            //Console.WriteLine("\n* LRL");
+            //c.Go("LRL");
 
-            //        Console.WriteLine("\n* xxxdR lyyLTyu");
-            //        c.Go("xxxdR lyyLTyu");
+            //Console.WriteLine("\n* xxxdR lyyLTyu");
+            //c.Go("xxxdR lyyLTyu");
 
             //var o = new Orc();
             //o.SayHi();
@@ -93,21 +94,38 @@ namespace Simulator
             //        }
             //Creature c = new Elf("Elandor", 5, 3);
             //Console.WriteLine(c);  // ELF: Elandor [5]
-            object[] myObjects = {
-        new Animals() { Description = "dogs"},
-        new Birds { Description = "  eagles ", Size = 10 },
-        new Elf("e", 15, -3),
-        new Orc("morgash", 6, 4)
-    };
-            Console.WriteLine("\nMy objects:");
-            foreach (var o in myObjects) Console.WriteLine(o);
+            //        object[] myObjects = {
+            //    new Animals() { Description = "dogs"},
+            //    new Birds { Description = "  eagles ", Size = 10 },
+            //    new Elf("e", 15, -3),
+            //    new Orc("morgash", 6, 4)
+            //};
+            //        Console.WriteLine("\nMy objects:");
+            //        foreach (var o in myObjects) Console.WriteLine(o);
             /*
                 My objects:
-                ANIMALS: Dogs <3>
+                ANIMALS: Dogs <3>s
                 BIRDS: Eagles (fly+) <10>
                 ELF: E## [10][0]
                 ORC: Morgash [6][4]
             */
+            void Lab5a()
+            {
+                Point p = new(10, 25);
+                Console.WriteLine(p.Next(Direction.Right));          // (11, 25)
+                Console.WriteLine(p.NextDiagonal(Direction.Right));  // (11, 24)
+
+                var R = new Rectangle(1, 1, 3, 3);
+                Console.WriteLine(R);
+                Console.WriteLine(R.Contains(2, 2));
+                Console.WriteLine(R.Contains(new Point(5, 5)));
+                var R2 = new Rectangle(new Point(5, 5), new Point(1, 1));
+                Console.WriteLine(R2);
+                var R3 = new Rectangle(1, 1, 5, 1);
+            }
+            Lab5a();
+
+
         }
 
     }

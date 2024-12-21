@@ -38,5 +38,12 @@ namespace Simulator
             else
                 return 0;
         }
+        public static bool Collinear(Point A, Point B)
+        {
+            if (A.X == B.X || A.Y == B.Y)
+                return true;
+            else
+                return false;
+        }
     }
 }
