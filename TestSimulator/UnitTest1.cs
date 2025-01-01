@@ -186,7 +186,7 @@ namespace TestSimulator
         [InlineData(100)]
         public void Constructor_ShouldThrowOutOfRange(int size)
         {
-            Assert.Throws<ArgumentException>(() => new SmallSquareMap(size));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new SmallSquareMap(size));
         }
 
         [Theory]
