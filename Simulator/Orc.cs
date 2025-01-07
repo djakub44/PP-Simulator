@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,10 @@ namespace Simulator
 {
     public class Orc : Creature
     {
+        public Orc(string name, SmallMap map, Point location, int level = 1, int rage = 0) : base(name, map, location)
+        {
+            Rage = rage;
+        }
         public Orc(string name, int level = 1, int rage = 0) : base(name, level)
         {
             Rage = rage;

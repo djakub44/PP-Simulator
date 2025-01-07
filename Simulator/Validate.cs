@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,13 @@ namespace Simulator
                 return false;
             else
                 return true;
+        }
+        public static bool MapNull(Creature c)
+        {
+            if (c.Map is null)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace Simulator
 {
     public class Elf : Creature
     {
+        public Elf(string name, SmallMap map, Point location, int level = 1, int agility = 0) : base(name, map, location)
+        {
+            Agility = agility;
+        }
         public Elf(string name, int level = 1, int agility = 0) : base(name, level)
         {
             Agility = agility;

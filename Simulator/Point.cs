@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Simulator
 {
-    public readonly struct Point
+    public readonly struct Point : IEquatable<Point>
     {
         public readonly int X, Y;
         public Point(int x, int y) => (X, Y) = (x, y);
@@ -43,6 +44,22 @@ namespace Simulator
 
         //this works only because directions are sorted clockwise in enum definition
         public Point NextDiagonal(Direction direction) => new Point(X, Y).Next(direction).Next(direction+1);
-        
+
+        public bool Equals(Point other)
+        {
+            if (other.X == X && other.Y == Y)
+                return true;
+            else
+                return false;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Point && Equals((Point)obj);
+        }
     }
 }
