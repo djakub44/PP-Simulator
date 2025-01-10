@@ -37,7 +37,7 @@ namespace Simulator
             if (map.AddCreature(this,location))
             {
                 Map = map;
-                Location = Location;
+                Location = location;
             }
         }
         public Creature() { }
