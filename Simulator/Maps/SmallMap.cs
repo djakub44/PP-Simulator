@@ -12,7 +12,7 @@
         {
             if (this.Exist(p) && !Creatures.ContainsKey(c))
             {
-                Creatures.Add(c, p);
+                Creatures[c] = p;
                 return true;
             }
             else

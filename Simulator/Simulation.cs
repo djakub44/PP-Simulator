@@ -12,14 +12,15 @@ namespace Simulator
 
         public override string ToString()
         {
-            return $"Current turn: {CurrentTurn.ToString()} --- Current creature: {CurrentCreature.Name} Current position: {CurrentCreature.Location} --- current movename {CurrentMoveName}";
+            return $"Current turn: {CurrentTurn} --- Current creature: {CurrentCreature.Name} Current position: {CurrentCreature.Location} --- current movename {CurrentMoveName}";
         }
         private int CurrentTurn { get; set; } = 0;
+        public bool DebugTurn {  get; set; } = true;
         private Direction[] Directions {  get; set; }
         /// <summary>
         /// Simulation's map.
         /// </summary>
-        public Map Map { get; init; }
+        public SmallMap Map { get; init; }
 
         /// <summary>
         /// Creatures moving on the map.
@@ -62,14 +63,15 @@ namespace Simulator
         /// if number of creatures differs from 
         /// number of starting positions.
         /// </summary>
-        public Simulation(Map map, List<Creature> creatures, List<Point> positions, string moves)
+        public Simulation(SmallMap map, List<Creature> creatures, List<Point> positions, string moves)
         {
-            if (creatures is null || creatures.Count() == 0 || creatures.Count() != positions.Count())
+            if (creatures is null || creatures.Count == 0 || creatures.Count != positions.Count)
             {
                 throw new Exception("error simulation");
             }
             else
             {
+
                 Map = map;
                 Creatures = creatures;
                 Positions = positions;
@@ -78,19 +80,27 @@ namespace Simulator
                 Directions = DirectionParser.Parse(moves);
                 CurrentMoveName = moves[0].ToString();
 
+                AddCreaturesToMap();
+            }   
+        }
+        private void AddCreaturesToMap()
+        {
+            for(int i = 0; i < Creatures.Count; i++)
+            {
+                Creatures[i].SetMap(Map, Positions[i]);
             }
-            
-        }       
+        }
+
         //CurrentTurn should be already incremented
         private Creature NextCreature()
         {
-            if (CurrentTurn < (Creatures.Count()-1))
+            if (CurrentTurn < (Creatures.Count-1))
             {
                 return Creatures[CurrentTurn];
             }
             else
             {
-                return Creatures[(CurrentTurn) % Creatures.Count()];
+                return Creatures[(CurrentTurn) % Creatures.Count];
             }
         }
         //CurrentTurn should be already incremented
@@ -112,7 +122,7 @@ namespace Simulator
             CurrentTurn++;
 
             //check if finished
-            if (CurrentTurn < Directions.Count())
+            if (CurrentTurn < Directions.Length)
             {
                 //change current creature
                 CurrentCreature = NextCreature();
@@ -122,6 +132,13 @@ namespace Simulator
             }
             else
                 Finished = true;
+            if (DebugTurn)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.WriteLine();
+            }
         }
     }
 }

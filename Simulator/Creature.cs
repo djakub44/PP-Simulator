@@ -49,7 +49,7 @@ namespace Simulator
         //maps services and movement
         public void SetMap(SmallMap map, Point location)
         {
-            if (Validate.MapNull(this) && map.AddCreature(this, location))
+            if ((Validate.MapNull(this) || this.Map == map) && map.AddCreature(this, location))
             {
                 Map = map;
                 Location = location;
