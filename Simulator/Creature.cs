@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace Simulator
 {
-    public abstract class Creature
+    public abstract class Creature : IMappable
     {
         private int level;
         private string name = "Unknown";
@@ -25,14 +25,16 @@ namespace Simulator
                 level = Validate.Limit(value, 1, 10);
             }
         }
-        public SmallMap? Map { get; private set; }
-        public Point Location { get; private set; }
+
+        public Map? Map { get; set; }
+        public Point Location { get; set; }
+
         public Creature(string name, int level = 1)
         {
             Name = name;
             Level = level;
         }
-        public Creature(string name, SmallMap map, Point location, int level = 1) : this(name, level)
+        public Creature(string name, Map map, Point location, int level = 1) : this(name, level)
         {
             if (map.AddCreature(this,location))
             {

@@ -22,7 +22,7 @@ namespace SimConsole
             Map = map;
             Size = map.Size;
         }
-        private Dictionary<Creature, Point> CreaturesOnPoint(Point point) => Map.Creatures.Where(c => c.Value.Equals(point)).ToDictionary();
+        private Dictionary<IMappable, Point> CreaturesOnPoint(Point point) => Map.Creatures.Where(c => c.Value.Equals(point)).ToDictionary();
 
         public void Draw()
         {
@@ -104,11 +104,11 @@ namespace SimConsole
             Console.Write(Box.Vertical);
         }
         private void NextLine()
-        {
+        {   
             Console.WriteLine();
         }
 
-        private void DrawCreatures(Dictionary<Creature, Point> C)
+        private void DrawCreatures(Dictionary<IMappable, Point> C)
         {
             string charToDraw = "";
             if (C.Count == 0)

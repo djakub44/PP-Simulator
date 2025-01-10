@@ -7,6 +7,7 @@
     {
         public int Size {get; private init; }
         protected Rectangle MapSquare {get; private init; }
+        public Dictionary<IMappable, Point> Creatures { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
@@ -19,6 +20,7 @@
             {
                 Size = size;
                 MapSquare = new Rectangle(0, 0, size - 1, size - 1);
+                Creatures = new Dictionary<IMappable, Point>();
             }
             else
                 throw new ArgumentOutOfRangeException($"Size of Small Map must be between 5 and {max}");
@@ -47,5 +49,39 @@
         /// <param name="d">Direction.</param>
         /// <returns>Next point.</returns>
         public abstract Point NextDiagonal(Point p, Direction d);
+
+        public bool AddCreature(IMappable c, Point p)
+        {
+            if (this.Exist(p) && !Creatures.ContainsKey(c))
+            {
+                Creatures[c] = p;
+                return true;
+            }
+            else
+                return false;
+        }
+        public void Remove(IMappable c)
+        {
+            if (Creatures.ContainsKey(c))
+            {
+                Creatures.Remove(c);
+                c.RemoveMap();
+            }
+        }
+        public void Move(IMappable c, Point p)
+        {
+            if (Creatures.ContainsKey(c))
+            {
+                Creatures[c] = p;
+            }
+        }
+        public List<IMappable> At(Point p) => this.At(p.X, p.Y);
+        public List<IMappable> At(int x, int y)
+        {
+            Point p = new Point(x, y);
+            return Creatures.Where(kvp => kvp.Value.Equals(p)).Select(kvp => kvp.Key).ToList();
+        }
+
+
     }
 }
