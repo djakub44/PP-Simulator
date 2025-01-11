@@ -10,6 +10,7 @@ namespace Simulator
 {
     public class Orc : Creature
     {
+        public override char Symbol { get; } = 'O';
         public Orc(string name, SmallMap map, Point location, int level = 1, int rage = 0) : base(name, map, location)
         {
             Rage = rage;

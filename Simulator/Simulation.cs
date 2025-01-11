@@ -9,11 +9,6 @@ namespace Simulator
 {
     public class Simulation
     {
-
-        public override string ToString()
-        {
-            return $"Current turn: {CurrentTurn} --- Current creature: {CurrentCreature.Name} Current position: {CurrentCreature.Location} --- current movename {CurrentMoveName}";
-        }
         private int CurrentTurn { get; set; } = 0;
         public bool DebugTurn {  get; set; } = true;
         private Direction[] Directions {  get; set; }
@@ -25,7 +20,7 @@ namespace Simulator
         /// <summary>
         /// Creatures moving on the map.
         /// </summary>
-        public List<Creature> Creatures { get; init; }
+        public List<IMappable> Creatures { get; init; }
 
         /// <summary>
         /// Starting positions of creatures.
@@ -49,7 +44,7 @@ namespace Simulator
         /// <summary>
         /// Creature which will be moving current turn.
         /// </summary>
-        public Creature CurrentCreature { get; set; }
+        public IMappable CurrentCreature { get; set; }
 
         /// <summary>
         /// Lowercase name of direction which will be used in current turn.
@@ -63,7 +58,7 @@ namespace Simulator
         /// if number of creatures differs from 
         /// number of starting positions.
         /// </summary>
-        public Simulation(SmallMap map, List<Creature> creatures, List<Point> positions, string moves)
+        public Simulation(SmallMap map, List<IMappable> creatures, List<Point> positions, string moves)
         {
             if (creatures is null || creatures.Count == 0 || creatures.Count != positions.Count)
             {
@@ -92,7 +87,7 @@ namespace Simulator
         }
 
         //CurrentTurn should be already incremented
-        private Creature NextCreature()
+        private IMappable NextCreature()
         {
             if (CurrentTurn < (Creatures.Count-1))
             {
@@ -138,6 +133,7 @@ namespace Simulator
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 Console.WriteLine();
+                Console.Clear();
             }
         }
     }

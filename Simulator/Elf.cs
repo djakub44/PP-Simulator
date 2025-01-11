@@ -9,6 +9,7 @@ namespace Simulator
 {
     public class Elf : Creature
     {
+        public override char Symbol { get; } = 'E';
         public Elf(string name, SmallMap map, Point location, int level = 1, int agility = 0) : base(name, map, location)
         {
             Agility = agility;

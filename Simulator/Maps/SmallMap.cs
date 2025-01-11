@@ -1,9 +1,6 @@
 ﻿namespace Simulator.Maps
 {
-    public abstract class SmallMap : Map
+    public abstract class SmallMap(int sizeX, int sizeY) : Map(sizeX, sizeY, 20, 20)
     {
-        
-        public SmallMap(int size) : base(size, 20) { }
-
     }
 }

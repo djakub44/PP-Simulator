@@ -53,7 +53,7 @@ namespace Simulator
             else
                 return true;
         }
-        public static bool MapNull(Creature c)
+        public static bool MapNull(IMappable c)
         {
             if (c.Map is null)
                 return true;

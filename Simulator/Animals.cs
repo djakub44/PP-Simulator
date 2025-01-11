@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Simulator
 {
-    public class Animals
+    public class Animals : IMappable
     {
+        public virtual char Symbol { get; init; } = 'A';
         private string description = "Unknown";
         //private uint size;
         public required string Description 
@@ -23,9 +25,17 @@ namespace Simulator
 
         public virtual string Info => $"{Description} <{Size}>";
 
-        public Animals()
+        public Map? Map { get; set; }
+        public Point Location { get; set; }
+
+        public Animals() { }
+        public Animals(Map map, Point location)
         {
-            
+            if (map.AddCreature(this, location))
+            {
+                Map = map;
+                Location = location;
+            }
         }
         public override string ToString() => string.Concat(this.GetType().Name, ": ", Info);
 

@@ -5,25 +5,29 @@
     /// </summary>
     public abstract class Map
     {
-        public int Size {get; private init; }
+        public int SizeX {get; private init; }
+        public int SizeY { get; private init; }
         protected Rectangle MapSquare {get; private init; }
         public Dictionary<IMappable, Point> Creatures { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param size>Size of the map.</param>
-        /// <param max>maximum size of the map.</param>
+        /// <param sizeX>Size X of the map.</param>
+        /// <param sizey>Size Y of the map.</param>
+        /// <param maxX>maximum X size of the map.</param>
+        /// <param maxY>maximum Y size of the map.</param>
         /// <returns></returns>
-        public Map(int size, int max)
+        public Map(int sizeX, int sizeY, int maxX, int maxY)
         {
-            if (Validate.LimitSize(size, 5, max))
+            if (Validate.LimitSize(sizeX, 5, maxX) && Validate.LimitSize(sizeY, 5, maxY))
             {
-                Size = size;
-                MapSquare = new Rectangle(0, 0, size - 1, size - 1);
+                SizeX = sizeX;
+                SizeY = sizeY;
+                MapSquare = new Rectangle(0, 0, sizeX - 1, sizeY - 1);
                 Creatures = new Dictionary<IMappable, Point>();
             }
             else
-                throw new ArgumentOutOfRangeException($"Size of Small Map must be between 5 and {max}");
+                throw new ArgumentOutOfRangeException($"Size X of Small Map must be between 5 and {maxX}. Size Y of Small Map must be between 5 and {maxY}");
         }
         
         /// <summary>
@@ -62,11 +66,8 @@
         }
         public void Remove(IMappable c)
         {
-            if (Creatures.ContainsKey(c))
-            {
                 Creatures.Remove(c);
                 c.RemoveMap();
-            }
         }
         public void Move(IMappable c, Point p)
         {
@@ -78,7 +79,7 @@
         public List<IMappable> At(Point p) => this.At(p.X, p.Y);
         public List<IMappable> At(int x, int y)
         {
-            Point p = new Point(x, y);
+            Point p = new(x, y);
             return Creatures.Where(kvp => kvp.Value.Equals(p)).Select(kvp => kvp.Key).ToList();
         }
 

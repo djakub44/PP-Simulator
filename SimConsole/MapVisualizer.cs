@@ -14,20 +14,22 @@ namespace SimConsole
     public class MapVisualizer
     {
         //najbrzydszy kod jaki w zyciu napisalem ale konczyl mi sie czas
-        private int Size { get; set; }
-        public SmallMap Map { get; init; }
+        private int SizeX { get; set; }
+        private int SizeY { get; set; }
+        public Map Map { get; init; }
         public MapVisualizer(SmallMap map)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Map = map;
-            Size = map.Size;
+            SizeX = map.SizeX;
+            SizeY = map.SizeY;
         }
         private Dictionary<IMappable, Point> CreaturesOnPoint(Point point) => Map.Creatures.Where(c => c.Value.Equals(point)).ToDictionary();
 
         public void Draw()
         {
             DrawHorizontalLineTopOrBottom(true);
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < SizeY; i++)
             {
                 if (i != 0)
                 {
@@ -35,7 +37,7 @@ namespace SimConsole
                 }
                 NextLine();
 
-                for (int j = 0; j < Size; j++)
+                for (int j = 0; j < SizeX; j++)
                 {
                     DrawSeparator();
                     DrawCreatures(CreaturesOnPoint(new Point(i, j)));
@@ -50,10 +52,10 @@ namespace SimConsole
         {
             if (top)
                 DrawCorner(1);
-            else 
+            else
                 DrawCorner(3);
          
-            for (int i = 0; i < (Size-1); i++)
+            for (int i = 0; i < (SizeX-1); i++)
             {
                 Console.Write(Box.Horizontal);
                 if (top)
@@ -74,7 +76,7 @@ namespace SimConsole
 
             Console.Write(Box.MidLeft);
 
-            for (int i = 0; i < (Size-1);  i++)
+            for (int i = 0; i < (SizeX-1);  i++)
             {
                 Console.Write(Box.Horizontal);
                 Console.Write(Box.Cross);
@@ -83,7 +85,7 @@ namespace SimConsole
 
             Console.Write(Box.MidRight);
         }
-        private void DrawCorner(int type)
+        private static void DrawCorner(int type)
         {
             switch (type)
             {
@@ -99,36 +101,29 @@ namespace SimConsole
                     break;
             }
         }
-        private void DrawSeparator()
+        private static void DrawSeparator()
         {
             Console.Write(Box.Vertical);
         }
-        private void NextLine()
+        private static void NextLine()
         {   
             Console.WriteLine();
         }
 
-        private void DrawCreatures(Dictionary<IMappable, Point> C)
+        private static void DrawCreatures(Dictionary<IMappable, Point> C)
         {
-            string charToDraw = "";
+            char charToDraw;
             if (C.Count == 0)
             {
-                charToDraw = " ";
+                charToDraw = ' ';
             }
             else if (C.Count == 1)
             {
-                if (C.First().Key.GetType() == typeof(Elf))
-                {
-                    charToDraw = "E";
-                }
-                else if (C.First().Key.GetType() == typeof(Orc))
-                {
-                    charToDraw = "O";
-                }
+                charToDraw = C.First().Key.Symbol;
             }
             else
             {
-                charToDraw = "X";
+                charToDraw = 'X';
             }
             Console.Write(charToDraw);
         }
