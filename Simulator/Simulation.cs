@@ -78,6 +78,9 @@ namespace Simulator
                 AddCreaturesToMap();
             }   
         }
+        /// <summary>
+        /// Adds List of creatures to the map
+        /// </summary>
         private void AddCreaturesToMap()
         {
             for(int i = 0; i < Creatures.Count; i++)
