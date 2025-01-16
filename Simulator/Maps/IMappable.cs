@@ -11,7 +11,7 @@ namespace Simulator.Maps
         char Symbol { get; }
         Map? Map { get; set; }
         Point Location { get; set; }
-        void SetMap(SmallMap map, Point location)
+        void SetMap(Map map, Point location)
         {
             if ((Validate.MapNull(this) || this.Map == map) && map.AddCreature(this, location))
             {
@@ -23,22 +23,14 @@ namespace Simulator.Maps
         }
         void RemoveMap()
         {
-            if (Map is not null)
+            if (Map is not null && Map.CreatureExistsOnMap(this))
             {
-                Map.Creatures.Remove(this);
+                Map.Creatures[Location].Remove(this);
                 Map = null;
                 Location = default;
             }
         }
-        void Go(Direction direction)
-        {
-            if (Map is not null)
-            {
-                Location = Map.Next(Location, direction);
-                Map.Move(this, Location);
-            }
-            else
-                throw new Exception("Creature is not on the map");
-        }
+        void Go(Direction direction);
+        
     }
 }

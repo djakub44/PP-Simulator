@@ -17,30 +17,37 @@ namespace SimConsole
         private int SizeX { get; set; }
         private int SizeY { get; set; }
         public Map Map { get; init; }
-        public MapVisualizer(SmallMap map)
+        public MapVisualizer(Map map)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Map = map;
             SizeX = map.SizeX;
             SizeY = map.SizeY;
         }
-        private Dictionary<IMappable, Point> CreaturesOnPoint(Point point) => Map.Creatures.Where(c => c.Value.Equals(point)).ToDictionary();
+        private List<IMappable> CreaturesOnPoint(Point point) 
+        {
+            if (Map.Creatures.TryGetValue(point, out var creaturesList))
+            {
+                return creaturesList;
+            }
+            return new List<IMappable>();
+        } 
 
         public void Draw()
         {
             DrawHorizontalLineTopOrBottom(true);
-            for (int i = 0; i < SizeY; i++)
+            for (int j = SizeY; j > 0; j--)
             {
-                if (i != 0)
+                if (j != SizeY)
                 {
                     DrawHorizontalLineMiddle();
                 }
                 NextLine();
 
-                for (int j = 0; j < SizeX; j++)
+                for (int i = 0; i < SizeX; i++)
                 {
                     DrawSeparator();
-                    DrawCreatures(CreaturesOnPoint(new Point(i, j)));
+                    DrawCreatures(CreaturesOnPoint(new Point(i, j))); 
                 }
                 DrawSeparator();
                 NextLine();
@@ -110,7 +117,7 @@ namespace SimConsole
             Console.WriteLine();
         }
 
-        private static void DrawCreatures(Dictionary<IMappable, Point> C)
+        private static void DrawCreatures(List<IMappable> C)
         {
             char charToDraw;
             if (C.Count == 0)
@@ -119,7 +126,7 @@ namespace SimConsole
             }
             else if (C.Count == 1)
             {
-                charToDraw = C.First().Key.Symbol;
+                charToDraw = C.First().Symbol;
             }
             else
             {

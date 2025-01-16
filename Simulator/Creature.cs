@@ -49,7 +49,16 @@ namespace Simulator
             if (level < 10)
                 level++;
         }
-        
+        public void Go(Direction direction)
+        {
+            if (Map is not null && Map.CreatureExistsOnMap(this) && Map.Creatures.ContainsKey(Location))
+            {
+                Map.Move(this, Location, Map.Next(Location, direction));
+                Location = Map.Next(Location, direction);
+            }
+            else
+                throw new Exception("Creature is not on the map");
+        }
         //public string[] Go(Direction[] directions) => directions.Select(direction => Go(direction)).ToArray();
         //public string[] Go(string directions) => Go(DirectionParser.Parse(directions));
         //other methods

@@ -1,14 +1,20 @@
-﻿namespace Simulator.Maps
+﻿using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq.Expressions;
+using System.Runtime.ExceptionServices;
+
+namespace Simulator.Maps
 {
     /// <summary>
     /// Map of points.
     /// </summary>
     public abstract class Map
     {
-        public int SizeX {get; private init; }
+        public int SizeX { get; private init; }
         public int SizeY { get; private init; }
-        protected Rectangle MapSquare {get; private init; }
-        public Dictionary<IMappable, Point> Creatures { get; set; }
+        protected Rectangle MapSquare { get; private init; }
+        public Dictionary<Point, List<IMappable>> Creatures { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
@@ -24,12 +30,12 @@
                 SizeX = sizeX;
                 SizeY = sizeY;
                 MapSquare = new Rectangle(0, 0, sizeX - 1, sizeY - 1);
-                Creatures = new Dictionary<IMappable, Point>();
+                Creatures = new Dictionary<Point, List<IMappable>>();
             }
             else
                 throw new ArgumentOutOfRangeException($"Size X of Small Map must be between 5 and {maxX}. Size Y of Small Map must be between 5 and {maxY}");
         }
-        
+
         /// <summary>
         /// Check if given point belongs to the map.
         /// </summary>
@@ -54,35 +60,59 @@
         /// <returns>Next point.</returns>
         public abstract Point NextDiagonal(Point p, Direction d);
 
-        public bool AddCreature(IMappable c, Point p)
+        public bool CreatureExistsOnMap(IMappable c)
         {
-            if (this.Exist(p) && !Creatures.ContainsKey(c))
+            foreach (Point p in Creatures.Keys)
             {
-                Creatures[c] = p;
-                return true;
+                foreach (IMappable i in Creatures[p])
+                {
+                    if (i == c)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public bool AddCreature(IMappable c, Point p, bool initial = true)
+        {
+            if (this.Exist(p))
+            {
+                if (!Creatures.ContainsKey(p))
+                    Creatures[p] = new List<IMappable>();
+                if (Creatures[p].Contains(c) && initial)
+                    return false;
+                else
+                {
+                    Creatures[p].Add(c);
+                    return true;
+                }
             }
             else
                 return false;
         }
         public void Remove(IMappable c)
         {
-                Creatures.Remove(c);
-                c.RemoveMap();
+            c.RemoveMap();
         }
-        public void Move(IMappable c, Point p)
+        public void Move(IMappable c, Point p, Point nextP)
         {
-            if (Creatures.ContainsKey(c))
-            {
-                Creatures[c] = p;
-            }
+            Creatures[p].Remove(c);
+            AddCreature(c, nextP, false);
         }
         public List<IMappable> At(Point p) => this.At(p.X, p.Y);
         public List<IMappable> At(int x, int y)
         {
+            //Point p = new(x, y);
+            //return Creatures.Where(kvp => kvp.Value[p].Equals(p)).Select(kvp => kvp.Key).ToList();
+
             Point p = new(x, y);
-            return Creatures.Where(kvp => kvp.Value.Equals(p)).Select(kvp => kvp.Key).ToList();
+            if (Creatures.ContainsKey(p))
+            {
+                return Creatures[new Point(x, y)];
+            }
+            else
+                return new List<IMappable>();
+
         }
-
-
     }
 }

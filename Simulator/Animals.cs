@@ -39,7 +39,16 @@ namespace Simulator
         }
         public override string ToString() => string.Concat(this.GetType().Name, ": ", Info);
 
-
+        public virtual void Go(Direction direction)
+        {
+            if (Map is not null && Map.CreatureExistsOnMap(this) && Map.Creatures.ContainsKey(Location))
+            {
+                Map.Move(this, Location, Map.Next(Location, direction));
+                Location = Map.Next(Location, direction);
+            }
+            else
+                throw new Exception("Creature is not on the map");
+        }
 
     }
 

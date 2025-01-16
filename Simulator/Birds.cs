@@ -29,20 +29,23 @@ namespace Simulator
                 return string.Concat($"{Description} ", (CanFly == true) ? "(Fly+)" : "(Fly-)",$" <{Size}>");
             }
         }
-        public void Go(Direction direction)
+        public override void Go(Direction direction)
         {
             if (Map is not null)
             {
                 if (CanFly)
                 {
-                    Location = Map.Next(Location, direction);
-                    Location = Map.Next(Location, direction);
-                    Map.Move(this, Location);
+                    Point nextP = Map.Next(Location, direction);
+                    nextP = Map.Next(nextP, direction);
+                    Map.Move(this, Location,nextP);
+                    Location = nextP;
+                    
                 }
                 else
                 {
-                    Location = Map.NextDiagonal(Location, direction);
-                    Map.Move(this, Location);
+                    Point nextP = Map.NextDiagonal(Location, direction);
+                    Map.Move(this, Location, nextP);
+                    Location = nextP;
                 }
             }
             else

@@ -15,7 +15,7 @@ namespace Simulator
         /// <summary>
         /// Simulation's map.
         /// </summary>
-        public SmallMap Map { get; init; }
+        public Map Map { get; init; }
 
         /// <summary>
         /// Creatures moving on the map.
@@ -58,7 +58,7 @@ namespace Simulator
         /// if number of creatures differs from 
         /// number of starting positions.
         /// </summary>
-        public Simulation(SmallMap map, List<IMappable> creatures, List<Point> positions, string moves)
+        public Simulation(Map map, List<IMappable> creatures, List<Point> positions, string moves)
         {
             if (creatures is null || creatures.Count == 0 || creatures.Count != positions.Count)
             {
