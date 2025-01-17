@@ -16,10 +16,17 @@ namespace SimConsole
         //najbrzydszy kod jaki w zyciu napisalem ale konczyl mi sie czas
         private int SizeX { get; set; }
         private int SizeY { get; set; }
-        public Map Map { get; init; }
+        public Map Map { get; private set; }   
         public MapVisualizer(Map map)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Map = map;
+            SizeX = map.SizeX;
+            SizeY = map.SizeY;
+            
+        }
+        public void ChangeMap(Map map)
+        {
             Map = map;
             SizeX = map.SizeX;
             SizeY = map.SizeY;

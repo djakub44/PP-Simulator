@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Simulator.Maps
 {

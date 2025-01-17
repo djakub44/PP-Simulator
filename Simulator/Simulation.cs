@@ -107,6 +107,17 @@ namespace Simulator
             return Moves[CurrentTurn].ToString();
         }
 
+        public Dictionary<Point, char> SymbolsOnPoint()
+        {
+            Dictionary<Point, char> dict = new();
+            
+            foreach (IMappable c in Creatures)
+            {
+                dict.Add(c.Location, c.Symbol);
+            }
+            return dict;
+        }
+
         /// <summary>
         /// Makes one move of current creature in current direction.
         /// Throw error if simulation is finished.
