@@ -58,7 +58,7 @@ namespace SimConsole
 
         public override string ToString()
         {
-            return $"{Mappable} --- {Move} --- {Symbols.First().Value}";
+            return $"{Mappable} {Move} {Symbols.First().Value}";
         }
     }
 }
