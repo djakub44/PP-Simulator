@@ -32,6 +32,6 @@ namespace Simulator.Maps
             }
         }
         void Go(Direction direction);
-        
+        public string ToString();
     }
 }
