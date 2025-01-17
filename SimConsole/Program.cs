@@ -51,16 +51,17 @@ namespace SimConsole
             string moves = "rrrrrr";
             Simulation simulation = new(map, creatures, points, moves) { DebugTurn = true };
             Simulation simulation2 = new(map2, creatures2, points2, moves) { DebugTurn = false };
-            MapVisualizer mapVisualizer = new(simulation.Map);
-            
+
+            MapVisualizer mapVisualizer = new(map);
             SimulationHistory history = new(simulation2);
-            
+            LogVisulizer logs = new(history);
             int i = 0;
             do
             {  
                 
                 mapVisualizer.Draw();
-                Console.WriteLine(history.TurnLogs[i].ToString());
+                //Console.WriteLine(history.TurnLogs[i].ToString());
+                logs.Draw(i);
                 simulation.Turn();
                 i++;
 
