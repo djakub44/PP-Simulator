@@ -11,7 +11,7 @@ namespace Simulator.Maps
     /// <summary>
     /// Map of points.
     /// </summary>
-    public abstract class Map
+    public abstract class Map :IEnumerable<IMappable>
     {
         public int SizeX { get; private init; }
         public int SizeY { get; private init; }
@@ -115,6 +115,16 @@ namespace Simulator.Maps
             else
                 return new List<IMappable>();
 
+        }
+
+        public IEnumerator<IMappable> GetEnumerator()
+        {
+            return Creatures.Values.SelectMany(list => list).ToList().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

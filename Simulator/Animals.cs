@@ -27,7 +27,6 @@ namespace Simulator
 
         public Map? Map { get; set; }
         public Point Location { get; set; }
-
         public Animals() { }
         public Animals(Map map, Point location)
         {

@@ -1,5 +1,7 @@
 ﻿using Simulator.Maps;
 using Simulator;
+using Microsoft.VisualBasic;
+using System.Collections.Generic;
 
 namespace SimConsole
 {
@@ -36,11 +38,35 @@ namespace SimConsole
             //Console.WriteLine(strusie.Symbol);
             //Console.WriteLine(orly.Info);
             //Console.WriteLine(orly.Symbol);
+            SmallSquareMap map3 = new(10);
+            Orc o1 = new("o1");
+            Birds o2 = new() { Description = "Strusie", CanFly = false};
+            Birds o3 = new() { Description = "Strusie", CanFly = false };
+            Birds o4 = new() { Description = "Strusie", CanFly = false };
+            ((IMappable)o1).SetMap(map3, new Point(2, 2));
+            ((IMappable)o2).SetMap(map3, new Point(1, 1));
+            ((IMappable)o3).SetMap(map3, new Point(1, 1));
+            ((IMappable)o4).SetMap(map3, new Point(1, 1));
+            MapSnapshot ms = new(map3);
+            foreach (IMappable o in map3)
+            {
+                Console.WriteLine(o.ToString());
+                
+            }
+            Console.WriteLine(ms.ToString());
+            Console.Write("---------");
+            o1.Go(DirectionParser.ParseOne('l'));
+            o2.Go(DirectionParser.ParseOne('r'));
+            o3.Go(DirectionParser.ParseOne('r'));
+            o4.Go(DirectionParser.ParseOne('r'));
+            Console.WriteLine(ms.ToString());
+            Console.Write("");
 
             BigBounceMap map = new(8, 6);
             BigBounceMap map2 = new(8, 6);
             //List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"), kroliki, strusie, orly];
             //List<Point> points = [new(2, 5), new(3, 1), new(3, 3), new(4, 3), new(3, 1)];
+            
 
             List<IMappable> creatures = [strusie];//[new Orc("Gorbag")];
             List<IMappable> creatures2 = [strusie2];//[new Orc("Gorbag")];
@@ -56,16 +82,18 @@ namespace SimConsole
             SimulationHistory history = new(simulation2);
             LogVisulizer logs = new(history);
             int i = 0;
-            do
-            {  
-                
-                mapVisualizer.Draw();
-                //Console.WriteLine(history.TurnLogs[i].ToString());
-                logs.Draw(i);
-                simulation.Turn();
-                i++;
 
-            } while (!simulation.Finished);
+
+            //do
+            //{  
+                
+            //    mapVisualizer.Draw();
+            //    //Console.WriteLine(history.TurnLogs[i].ToString());
+            //    logs.Draw(i);
+            //    simulation.Turn();
+            //    i++;
+
+            //} while (!simulation.Finished);
 
         }
     }

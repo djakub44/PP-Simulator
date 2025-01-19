@@ -29,6 +29,7 @@ namespace Simulator
 
         public Map? Map { get; set; }
         public Point Location { get; set; }
+        public String LocationString { get; set; }
 
         public Creature(string name, int level = 1)
         {
@@ -62,7 +63,10 @@ namespace Simulator
         //public string[] Go(Direction[] directions) => directions.Select(direction => Go(direction)).ToArray();
         //public string[] Go(string directions) => Go(DirectionParser.Parse(directions));
         //other methods
-        public override string ToString() => string.Concat(this.GetType().Name, ": ", Info);
+        public override string ToString()
+        {
+            return string.Concat(this.GetType().Name, ": ", Info);
+        }
         public abstract string Greeting();
         //public void PrintStatus()
         //{

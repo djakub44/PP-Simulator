@@ -8,6 +8,8 @@ namespace Simulator
 {
     public static class DirectionParser
     {
+
+        public static Direction ParseOne(char c) => Parse(c.ToString())[0];
         public static Direction[] Parse(string input)
         {
             string tempresult = "";

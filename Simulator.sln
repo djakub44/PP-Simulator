@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runner", "..\..\..\..\Users
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSimulator", "TestSimulator\TestSimulator.csproj", "{AB87F051-45AF-4929-AF4F-5AF3B6DFB1B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimConsole", "SimConsole\SimConsole.csproj", "{870AC959-723F-4A71-924A-02A5C6FB6642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimConsole", "SimConsole\SimConsole.csproj", "{870AC959-723F-4A71-924A-02A5C6FB6642}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCreatures", "..\..\..\..\Users\new.MSI\source\repos\WebCreatures\WebCreatures\WebCreatures.csproj", "{B78862EB-8CC9-4176-AD81-2C18D6BE89E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{870AC959-723F-4A71-924A-02A5C6FB6642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{870AC959-723F-4A71-924A-02A5C6FB6642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{870AC959-723F-4A71-924A-02A5C6FB6642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78862EB-8CC9-4176-AD81-2C18D6BE89E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78862EB-8CC9-4176-AD81-2C18D6BE89E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78862EB-8CC9-4176-AD81-2C18D6BE89E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78862EB-8CC9-4176-AD81-2C18D6BE89E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
